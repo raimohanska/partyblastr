@@ -1,0 +1,90 @@
+body {
+    background: #333 url('../images/pageBG.png') repeat;
+    font-family: Arial;
+    font-size: 0.9em;
+    color: #ccc;
+    margin-top: 0;
+    margin-left: 120px;
+}
+h1 {
+    background : url('../images/logoParty.png') no-repeat right top;
+    width: 329px;
+    height: 164px;
+    text-indent : -3000px;
+    float : left;
+    margin : 0 20px 0 -48px;
+    display : block;
+}
+#share {
+    display : inline-block;
+    margin-top: 30px;
+}
+#party-url {
+    color : #ed09a3;
+    margin-left: 5px;
+}
+#new-member {
+    width : 512px;
+    height : 100px;
+    margin-left : 300px;
+    margin-top : 10px;
+    padding-top : 44px;
+    padding-left: 25px;
+    background : url('../images/joinBG.png') no-repeat 0px 0px;
+}
+#new-member #join {
+    background : url('../images/buttonJoin.png') no-repeat right top;
+    width: 189px;
+    height: 40px;
+    display: inline-block;
+    text-decoration: none;
+    color: #333;
+    text-align: center;
+    padding-top: 5px;
+    font-size: 24px;
+    text-shadow: 1px 1px 1px #fff;
+}
+#header {
+    height: 164px;
+}
+#members {
+    background : url('../images/horizontalDivider.png') no-repeat right top;
+    clear : both;
+    margin-top : 20px;
+    padding-top: 1px;
+}
+
+#playlist {
+    background : url('../images/horizontalDivider.png') no-repeat right top;
+    margin-top : 20px;
+    padding-top : 1px;
+    position : relative;
+}
+
+#playlist #to-spotify {
+    position : absolute;
+    left : 160px;
+    top : 25px;
+}
+
+.error #party { display : none; }
+
+.loading .progress-indicator {
+    background-image: url('../images/ajax-loader.gif');
+    background-repeat: no-repeat;
+    height: 20px;
+}
+.loading #playlist table {
+    display : none;
+}
+#error { display : none; }
+.error #error { display : block; }
+#to-spotify.loading {
+    background-image: url('../images/ajax-loader-small.gif');
+    background-repeat: no-repeat;
+    height: 20px;
+    padding-left: 20px;
+    pointer-events: none;
+    cursor: default;
+    color: #888;
+}

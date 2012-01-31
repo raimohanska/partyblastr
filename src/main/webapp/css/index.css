@@ -1,0 +1,28 @@
+body {
+    background: #333 url('../images/pageBG.png') repeat;
+    font-family: Arial;
+}
+h1 {
+    background : url('../images/logoSplash.gif') no-repeat right top;
+    width: 683px;
+    height: 488px;
+    text-indent : -3000px;
+    left: 210px;
+    top: 30px;
+    position: absolute;
+}
+#party {
+    position: absolute;
+    left: 340px;
+    top: 495px;
+    background : url('../images/buttonSplash.png') no-repeat right top;
+    width: 476px;
+    height: 64px;
+    display: block;
+    text-decoration: none;
+    color: #333;
+    text-align: center;
+    padding-top: 13px;
+    font-size: 30px;
+    text-shadow: 1px 1px 1px #fff;
+}
