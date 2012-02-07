@@ -9,6 +9,11 @@ class PartyServlet extends ScalatraServlet {
   implicit val formats = DefaultFormats
 
   post("/party") {
+    contentType = "application/json"
+    response.setStatus(201)
+    val party = Party("1", Nil)
+    response.setHeader("Location", request.getRequestURL.toString + "/" + party.id)
+    render(party)
   }
   get("/party/:id") {
   }
