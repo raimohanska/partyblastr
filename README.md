@@ -16,7 +16,7 @@ Running locally
 
 You can run the application locally using SBT
 
-    sbt
+    ./sbt
     container:start
     ~compile
 
