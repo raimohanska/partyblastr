@@ -10,8 +10,8 @@ class PartyServerSpec extends MutableScalatraSpec {
     override val lastFmApi = new LastFM {
       override def getPlaylistForUsers(usernames: List[String]) = lastfm.Track("Hallelujah", Artist("Jeff Buckley")) :: Nil
     }
-    override val idGenerator = new StaticIdGenerator
     */
+    override val idGenerator = new StaticIdGenerator
   }
   addServlet(servlet, "/*")
 /*

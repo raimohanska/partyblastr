@@ -7,11 +7,12 @@ import scala.collection.immutable.HashMap
 
 class PartyServlet extends ScalatraServlet {
   implicit val formats = DefaultFormats
+  val idGenerator : IdGenerator = new RandomIdGenerator
 
   post("/party") {
     contentType = "application/json"
     response.setStatus(201)
-    val party = Party("1", Nil)
+    val party = Party(idGenerator.nextId, Nil)
     response.setHeader("Location", request.getRequestURL.toString + "/" + party.id)
     render(party)
   }
