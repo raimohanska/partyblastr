@@ -5,8 +5,17 @@
     <script type="text/javascript">
       $(function() {
         $("#party").click(function() {
-          alert("LOL")
+          $.ajax({
+            type: 'POST',
+            url: "/party",
+            data: "",
+            success: startParty
+          })
         })
+
+        function startParty(party) {
+          alert(party)
+        }
       })
     </script>
     <title>PARTYBLASTR</title>
