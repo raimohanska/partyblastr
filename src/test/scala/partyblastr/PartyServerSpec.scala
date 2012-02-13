@@ -17,7 +17,7 @@ class PartyServerSpec extends MutableScalatraSpec {
 /*
   "Non-existent party" should {
     "return 404" in {
-      get("/part/asdf") {
+      get("/party/asdf") {
         status must_== 404
       }
     }
