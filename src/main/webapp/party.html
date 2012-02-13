@@ -5,9 +5,12 @@
     <script src="js/URI.js"></script>
     <script src="js/jquery.placeholder.js"></script>
     <script type="text/javascript">
-      $(function() {
-        $('input[placeholder]').placeholder();
-      })
+      function partyIdFromUrl() { return URI.parseQuery(URI.parse(document.location.toString()).query).party }
+      $(function() { $('input[placeholder]').placeholder() })
+    </script>
+
+    <script type="text/javascript">
+      // Implement logic here
     </script>
   </head>
   <body>
