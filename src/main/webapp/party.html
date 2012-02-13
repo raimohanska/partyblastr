@@ -1,23 +1,35 @@
 <html>
   <head>
     <title>PARTYBLASTR - Party</title>
+    <script src="js/jquery-1.7.1.min.js"></script>
+    <script src="js/URI.js"></script>
+    <script src="js/jquery.placeholder.js"></script>
+    <script type="text/javascript">
+      $(function() {
+        $('input[placeholder]').placeholder();
+      })
+    </script>
   </head>
   <body>
-    <h1>PARTYBLASTR - PARTY</h1>
     <div id="party">
-      <div id="members">
-        <div id="new-member">
-          <label for="new-member-id">last.fm username</label>
-          <input id="new-member-id" type="text"/>
-          <button>Add</button>
+      <div id="header">
+        <h1>PARTYBLASTR - PARTY</h1>
+        <div id="share">
+          <label for="party-url">Your Party URL:</label><a id="party-url"></a>
         </div>
+        <div id="new-member">
+          <input id="new-member-id" type="text" placeholder="Enter your Last.fm username"/>
+          <a href="#" id="join">Join this party</a>
+        </div>
+      </div>
+      <div id="members">
+        <h2>People in this party</h2>
+<!--
         <ul>
           <li class="username"></li>
         </ul>
+-->
       </div>
-      <table id="playlist">
-        <tr><td class="artist"></td><td class="title"></td></tr>
-      </table>
     </div>
   </body>
 </html>

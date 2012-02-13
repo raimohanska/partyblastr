@@ -7,17 +7,22 @@ body {
     margin-left: 120px;
 }
 h1 {
-    background : url('../images/logoParty.png') no-repeat right top;
-    width: 329px;
-    height: 164px;
+    background : url('../images/logoPartypage.gif') no-repeat right -63px;
+    width: 354px;
+    height: 180px;
     text-indent : -3000px;
     float : left;
     margin : 0 20px 0 -48px;
     display : block;
 }
+h2 {
+    font-size: 16px;
+    font-weight: normal;
+}
 #share {
     display : inline-block;
     margin-top: 30px;
+    font-size: 15px;
 }
 #party-url {
     color : #ed09a3;
@@ -26,7 +31,7 @@ h1 {
 #new-member {
     width : 512px;
     height : 100px;
-    margin-left : 300px;
+    margin-left : 326px;
     margin-top : 10px;
     padding-top : 44px;
     padding-left: 25px;
@@ -40,23 +45,72 @@ h1 {
     text-decoration: none;
     color: #333;
     text-align: center;
-    padding-top: 5px;
+    padding-top: 3px;
     font-size: 24px;
     text-shadow: 1px 1px 1px #fff;
 }
+#new-member-id {
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+    border-width: 2px 0 0;
+    border-style: inset none none;
+    border-color: #ffffff;
+    color: #444444;
+    font-family: Arial;
+    font-size: 16px;
+    padding: 8px 7px 9px 15px;
+    position: relative;
+    top: -2px;
+    width: 264px;
+    margin-right: 7px;
+}
+
+#new-member-id.placeholder {
+    color: #aaaaaa;
+}
+
 #header {
     height: 164px;
 }
 #members {
-    background : url('../images/horizontalDivider.png') no-repeat right top;
+    background : url('../images/horizontalDivider.png') no-repeat left top;
     clear : both;
     margin-top : 20px;
     padding-top: 1px;
 }
 
+#members ul {
+    list-style: none;
+    padding: 0;
+    overflow: hidden;
+    width: 980px;
+    margin-bottom: 5px;
+}
+
+#members .username {
+    display: inline;
+    margin: 0 20px 15px 0;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+    color: #333;
+    text-shadow: 1px 1px 1px #fff;
+    font-size: 15px;
+    padding: 4px 14px;
+    float: left;
+    background: rgb(238,238,238);
+    background: -moz-linear-gradient(top,  rgba(238,238,238,1) 0%, rgba(204,204,204,1) 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(238,238,238,1)), color-stop(100%,rgba(204,204,204,1)));
+    background: -webkit-linear-gradient(top,  rgba(238,238,238,1) 0%,rgba(204,204,204,1) 100%);
+    background: -o-linear-gradient(top,  rgba(238,238,238,1) 0%,rgba(204,204,204,1) 100%);
+    background: -ms-linear-gradient(top,  rgba(238,238,238,1) 0%,rgba(204,204,204,1) 100%);
+    background: linear-gradient(top,  rgba(238,238,238,1) 0%,rgba(204,204,204,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#cccccc',GradientType=0 );
+}
+
 #playlist {
-    background : url('../images/horizontalDivider.png') no-repeat right top;
-    margin-top : 20px;
+    background : url('../images/horizontalDivider.png') no-repeat left top;
     padding-top : 1px;
     position : relative;
 }
