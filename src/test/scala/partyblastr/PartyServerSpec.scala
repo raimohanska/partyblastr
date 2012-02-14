@@ -14,7 +14,6 @@ class PartyServerSpec extends MutableScalatraSpec {
     override val idGenerator = new StaticIdGenerator
   }
   addServlet(servlet, "/*")
-/*
   "Non-existent party" should {
     "return 404" in {
       get("/party/asdf") {
@@ -22,7 +21,6 @@ class PartyServerSpec extends MutableScalatraSpec {
       }
     }
   }
-*/
   "Creating party" should {
     "return 201 CREATED" in {
       postJson("/party", "") {
@@ -45,7 +43,7 @@ class PartyServerSpec extends MutableScalatraSpec {
       }
     }
   }
- /*
+
   "Empty party" should {
     "have zero members" in {
       postJson("/party", "") {}
@@ -54,6 +52,7 @@ class PartyServerSpec extends MutableScalatraSpec {
       }
     }
   }
+  /*
   "Newly added member" should {
     "be included in party" in {
       postJson("/party", "") {}

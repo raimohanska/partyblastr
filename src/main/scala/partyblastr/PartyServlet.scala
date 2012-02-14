@@ -8,15 +8,24 @@ import scala.collection.immutable.HashMap
 class PartyServlet extends ScalatraServlet {
   implicit val formats = DefaultFormats
   val idGenerator : IdGenerator = new RandomIdGenerator
+  private var parties = new HashMap[String, Party]
 
   post("/party") {
     contentType = "application/json"
     response.setStatus(201)
     val party = Party(idGenerator.nextId, Nil)
     response.setHeader("Location", request.getRequestURL.toString + "/" + party.id)
+    parties += (party.id -> party)
     render(party)
   }
   get("/party/:id") {
+    parties.get(params("id")) match {
+      case Some(party) => {
+        contentType = "application/json"
+        render(party)
+      }
+      case None => halt(404, "Party not found")
+    }
   }
   get("/party/:id/playlist") {
   }
