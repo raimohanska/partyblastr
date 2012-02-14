@@ -11,11 +11,9 @@ class PartyServlet extends ScalatraServlet {
   private var parties = new HashMap[String, Party]
 
   post("/party") {
-    response.setStatus(201)
     val party = Party(idGenerator.nextId, Nil)
     response.setHeader("Location", request.getRequestURL.toString + "/" + party.id)
-    parties += (party.id -> party)
-    renderParty(party)
+    saveAndRenderParty(party)
   }
   get("/party/:id") {
     parties.get(params("id")) match {
@@ -27,12 +25,7 @@ class PartyServlet extends ScalatraServlet {
   }
   post("/party/:id/members") {
     parties.get(params("id")) match {
-      case Some(party) => {
-        val newParty = party.copy(members = party.members :+ Member(request.body))
-        parties += (party.id -> newParty)
-        response.setStatus(201)
-        renderParty(newParty)
-      }
+      case Some(party) => saveAndRenderParty(party.copy(members = party.members :+ Member(request.body)))
       case None => halt(404, "Party not found")
     }
   }
@@ -41,6 +34,11 @@ class PartyServlet extends ScalatraServlet {
   def renderParty(party: Party) = {
     contentType = "application/json"
     render(party)
+  }
+  def saveAndRenderParty(party: Party) = {
+    parties += (party.id -> party)
+    response.setStatus(201)
+    renderParty(party)
   }
 }
 
