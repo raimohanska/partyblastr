@@ -16,17 +16,13 @@ class PartyServlet extends ScalatraServlet {
     saveAndRenderParty(party)
   }
   get("/party/:id") {
-    parties.get(params("id")) match {
-      case Some(party) => renderParty(party)
-      case None => halt(404, "Party not found")
-    }
+    processPartyOrError(renderParty)
   }
   get("/party/:id/playlist") {
   }
   post("/party/:id/members") {
-    parties.get(params("id")) match {
-      case Some(party) => saveAndRenderParty(party.copy(members = party.members :+ Member(request.body)))
-      case None => halt(404, "Party not found")
+    processPartyOrError { party =>
+      saveAndRenderParty(party.copy(members = party.members :+ Member(request.body)))
     }
   }
 
@@ -39,6 +35,12 @@ class PartyServlet extends ScalatraServlet {
     parties += (party.id -> party)
     response.setStatus(201)
     renderParty(party)
+  }
+  def processPartyOrError(handleParty: (Party) => String) = {
+    parties.get(params("id")) match {
+      case Some(party) => handleParty(party)
+      case None => halt(404, "Party not found")
+    }
   }
 }
 
