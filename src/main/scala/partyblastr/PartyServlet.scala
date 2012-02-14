@@ -11,19 +11,15 @@ class PartyServlet extends ScalatraServlet {
   private var parties = new HashMap[String, Party]
 
   post("/party") {
-    contentType = "application/json"
     response.setStatus(201)
     val party = Party(idGenerator.nextId, Nil)
     response.setHeader("Location", request.getRequestURL.toString + "/" + party.id)
     parties += (party.id -> party)
-    render(party)
+    renderParty(party)
   }
   get("/party/:id") {
     parties.get(params("id")) match {
-      case Some(party) => {
-        contentType = "application/json"
-        render(party)
-      }
+      case Some(party) => renderParty(party)
       case None => halt(404, "Party not found")
     }
   }
@@ -33,6 +29,10 @@ class PartyServlet extends ScalatraServlet {
   }
 
   def render(content: AnyRef) = net.liftweb.json.Serialization.write(content)
+  def renderParty(party: Party) = {
+    contentType = "application/json"
+    render(party)
+  }
 }
 
 case class Party(id: String, members : List[Member])
