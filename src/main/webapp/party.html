@@ -17,6 +17,16 @@
           success: showParty
         });
 
+        $("#join").click(function() {
+          $.ajax({
+            type: 'POST',
+            url: "/party/" + partyIdFromUrl() + "/members",
+            data: $("#new-member-id").val(),
+            contentType: "text/plain",
+            success: showParty
+          })
+        })
+
         function showParty(party) {
           alert(party)
         }

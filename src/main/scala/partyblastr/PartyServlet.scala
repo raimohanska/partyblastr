@@ -26,6 +26,15 @@ class PartyServlet extends ScalatraServlet {
   get("/party/:id/playlist") {
   }
   post("/party/:id/members") {
+    parties.get(params("id")) match {
+      case Some(party) => {
+        val newParty = party.copy(members = party.members :+ Member(request.body))
+        parties += (party.id -> newParty)
+        response.setStatus(201)
+        renderParty(newParty)
+      }
+      case None => halt(404, "Party not found")
+    }
   }
 
   def render(content: AnyRef) = net.liftweb.json.Serialization.write(content)

@@ -52,7 +52,6 @@ class PartyServerSpec extends MutableScalatraSpec {
       }
     }
   }
-  /*
   "Newly added member" should {
     "be included in party" in {
       postJson("/party", "") {}
@@ -64,6 +63,7 @@ class PartyServerSpec extends MutableScalatraSpec {
       }
     }
   }
+  /*
   "Party playlist" should {
     "contain artists and song titles" in {
       getJson("/party/1/playlist") {
