@@ -5,6 +5,7 @@
     <script src="js/jquery-1.7.1.min.js"></script>
     <script src="js/URI.js"></script>
     <script src="js/jquery.placeholder.js"></script>
+    <script src="js/transparency.js"></script>
     <script type="text/javascript">
       function partyIdFromUrl() { return URI.parseQuery(URI.parse(document.location.toString()).query).party }
       $(function() { $('input[placeholder]').placeholder() })
@@ -28,7 +29,7 @@
         })
 
         function showParty(party) {
-          alert(party)
+          $("#members ul").render(party.members)
         }
       })
     </script>
@@ -47,11 +48,9 @@
       </div>
       <div id="members">
         <h2>People in this party</h2>
-<!--
         <ul>
           <li class="username"></li>
         </ul>
--->
       </div>
     </div>
   </body>
