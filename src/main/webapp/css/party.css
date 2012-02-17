@@ -143,8 +143,9 @@ h2 {
 
 #playlist #to-spotify {
     position : absolute;
-    left : 160px;
-    top : 25px;
+    left : 112px;
+    top : 11px;
+    text-decoration: none;
 }
 
 #playlist #to-spotify {
