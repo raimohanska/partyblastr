@@ -37,7 +37,7 @@
         }
 
         function showPlaylist(playlist) {
-          alert(playlist)
+          $("#playlist ul").render(playlist.tracks)
         }
       })
     </script>
@@ -58,6 +58,12 @@
         <h2>People in this party</h2>
         <ul>
           <li class="username"></li>
+        </ul>
+      </div>
+      <div id="playlist">
+        <h2>Party playlist</h2>
+        <ul>
+          <li><div class="artist"></div><div class="title"></div></li>
         </ul>
       </div>
     </div>
