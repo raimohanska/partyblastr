@@ -8,6 +8,7 @@ import scala.collection.immutable.HashMap
 class PartyServlet extends ScalatraServlet {
   implicit val formats = DefaultFormats
   val idGenerator : IdGenerator = new RandomIdGenerator
+  val lastFM = new LastFM
   private var parties = new HashMap[String, Party]
 
   post("/party") {
@@ -20,7 +21,9 @@ class PartyServlet extends ScalatraServlet {
   }
   get("/party/:id/playlist") {
     processPartyOrError { party =>
-      render(Playlist(List(Track("Jeff Buckley", "Hallelujah"))))
+      val lastFmTracks = lastFM.getPlaylistForUsers(party.members.map(member => member.username))
+      val tracks = lastFmTracks.map(track => Track(track.artist.name, track.name))
+      render(Playlist(tracks))
     }
   }
   post("/party/:id/members") {

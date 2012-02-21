@@ -6,11 +6,11 @@ import org.scalatra.test.specs2.MutableScalatraSpec
 class PartyServerSpec extends MutableScalatraSpec {
   args(sequential=true)
   val servlet = new PartyServlet {
-    /*
-    override val lastFmApi = new LastFM {
+
+    override val lastFM = new LastFM {
       override def getPlaylistForUsers(usernames: List[String]) = lastfm.Track("Hallelujah", Artist("Jeff Buckley")) :: Nil
     }
-    */
+
     override val idGenerator = new StaticIdGenerator
   }
   addServlet(servlet, "/*")
