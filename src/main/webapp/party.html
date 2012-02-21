@@ -30,6 +30,14 @@
 
         function showParty(party) {
           $("#members ul").render(party.members)
+          $.ajax({
+            url: "/party/" + partyIdFromUrl() + "/playlist",
+            success: showPlaylist
+          });
+        }
+
+        function showPlaylist(playlist) {
+          alert(playlist)
         }
       })
     </script>

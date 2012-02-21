@@ -16,9 +16,12 @@ class PartyServlet extends ScalatraServlet {
     saveAndRenderParty(party)
   }
   get("/party/:id") {
-    processPartyOrError(renderParty)
+    processPartyOrError(render)
   }
   get("/party/:id/playlist") {
+    processPartyOrError { party =>
+      render(Playlist(List(Track("Jeff Buckley", "Hallelujah"))))
+    }
   }
   post("/party/:id/members") {
     processPartyOrError { party =>
@@ -26,15 +29,15 @@ class PartyServlet extends ScalatraServlet {
     }
   }
 
-  def render(content: AnyRef) = net.liftweb.json.Serialization.write(content)
-  def renderParty(party: Party) = {
+  def render(content: AnyRef) = {
     contentType = "application/json"
-    render(party)
+    net.liftweb.json.Serialization.write(content)
   }
+
   def saveAndRenderParty(party: Party) = {
     parties += (party.id -> party)
     response.setStatus(201)
-    renderParty(party)
+    render(party)
   }
   def processPartyOrError(handleParty: (Party) => String) = {
     parties.get(params("id")) match {

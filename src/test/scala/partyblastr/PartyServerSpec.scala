@@ -63,7 +63,6 @@ class PartyServerSpec extends MutableScalatraSpec {
       }
     }
   }
-  /*
   "Party playlist" should {
     "contain artists and song titles" in {
       getJson("/party/1/playlist") {
@@ -71,7 +70,6 @@ class PartyServerSpec extends MutableScalatraSpec {
       }
     }
   }
-  */
   /*
   "Spotify URIs" should {
     "be provided for songs" in {
