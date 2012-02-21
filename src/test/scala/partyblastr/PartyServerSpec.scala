@@ -70,7 +70,7 @@ class PartyServerSpec extends MutableScalatraSpec {
       }
     }
   }
-  /*
+
   "Spotify URIs" should {
     "be provided for songs" in {
       getJson("/party/1/spotify") {
@@ -78,7 +78,7 @@ class PartyServerSpec extends MutableScalatraSpec {
       }
     }
   }
-  */
+
   def postJson(url: String, body: String, statusCode: Int = 201)(assertions: => Unit) = {
     post(url, body) { jsonAssertions(assertions, statusCode) }
   }

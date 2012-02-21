@@ -4,11 +4,13 @@ import lastfm.LastFM
 import org.scalatra._
 import net.liftweb.json._
 import scala.collection.immutable.HashMap
+import spotify.Spotify
 
 class PartyServlet extends ScalatraServlet {
   implicit val formats = DefaultFormats
   val idGenerator : IdGenerator = new RandomIdGenerator
   val lastFM = new LastFM
+  val spotify = new Spotify()
   private var parties = new HashMap[String, Party]
 
   post("/party") {
@@ -21,15 +23,24 @@ class PartyServlet extends ScalatraServlet {
   }
   get("/party/:id/playlist") {
     processPartyOrError { party =>
-      val lastFmTracks = lastFM.getPlaylistForUsers(party.members.map(member => member.username))
-      val tracks = lastFmTracks.map(track => Track(track.artist.name, track.name))
-      render(Playlist(tracks))
+      render(Playlist(getPartyTracks(party)))
     }
   }
+  get("/party/:id/spotify") {
+    processPartyOrError { party =>
+      render(getPartyTracks(party).map(track => spotify.getSpotifyUri(track).toList).flatten)
+    }
+  }
+
   post("/party/:id/members") {
     processPartyOrError { party =>
       saveAndRenderParty(party.copy(members = party.members :+ Member(request.body)))
     }
+  }
+
+  def getPartyTracks(party : Party) = {
+    val lastFmTracks = lastFM.getPlaylistForUsers(party.members.map(member => member.username))
+    lastFmTracks.map(track => Track(track.artist.name, track.name))
   }
 
   def render(content: AnyRef) = {

@@ -28,6 +28,13 @@
           })
         })
 
+        $("#to-spotify").click(function() {
+          $.ajax({
+            url: "/party/" + partyIdFromUrl() + "/spotify",
+            success: exportToSpotify
+          });
+        })
+
         function showParty(party) {
           $("#members ul").render(party.members)
           $.ajax({
@@ -38,6 +45,11 @@
 
         function showPlaylist(playlist) {
           $("#playlist ul").render(playlist.tracks)
+        }
+
+
+        function exportToSpotify(uris) {
+          alert(uris.join(" "))
         }
       })
     </script>
