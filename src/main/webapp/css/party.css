@@ -88,7 +88,7 @@ h2 {
     margin-bottom: 5px;
 }
 
-#members .username {
+#members .username, #to-spotify{
     display: inline;
     margin: 0 20px 15px 0;
     -webkit-border-radius: 20px;
@@ -146,12 +146,6 @@ h2 {
     left : 112px;
     top : 11px;
     text-decoration: none;
-}
-
-#playlist #to-spotify {
-    position : absolute;
-    left : 160px;
-    top : 25px;
 }
 
 .error #party { display : none; }
