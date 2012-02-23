@@ -3,6 +3,11 @@
     <link rel="stylesheet" href="css/index.css" type="text/css"/>
     <script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
     <script type="text/javascript">
+      var split = document.location.toString().split("?")
+      var search = split[1]
+      if (search) {
+        document.location = split[0] + "party.html?" + search
+      }
       $(function() {
         $("#party").click(function() {
           $.ajax({
@@ -14,7 +19,7 @@
         })
 
         function startParty(party) {
-          document.location = "party.html?party=" + party.id
+          document.location = "party.html?" + party.id
         }
       })
     </script>

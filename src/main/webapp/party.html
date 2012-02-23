@@ -3,11 +3,10 @@
     <title>PARTYBLASTR - Party</title>
     <link type="text/css" rel="stylesheet" href="css/party.css">
     <script src="js/jquery-1.7.1.min.js"></script>
-    <script src="js/URI.js"></script>
     <script src="js/jquery.placeholder.js"></script>
     <script src="js/transparency.js"></script>
     <script type="text/javascript">
-      function partyIdFromUrl() { return URI.parseQuery(URI.parse(document.location.toString()).query).party }
+      function partyIdFromUrl() { return document.location.toString().split("?")[1] }
       $(function() { $('input[placeholder]').placeholder() })
     </script>
 
@@ -37,6 +36,8 @@
 
         function showParty(party) {
           $("#members ul").render(party.members)
+          var url = document.location.toString().replace("party.html", "")
+          $("#party-url").text(url).attr("href", url)
           $.ajax({
             url: "/party/" + partyIdFromUrl() + "/playlist",
             success: showPlaylist
@@ -63,7 +64,7 @@
         </div>
         <div id="new-member">
           <input id="new-member-id" type="text" placeholder="Enter your Last.fm username"/>
-          <a href="#" id="join">Join this party</a>
+          <a id="join">Join this party</a>
         </div>
       </div>
       <div id="members">
