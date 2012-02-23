@@ -2,15 +2,20 @@ package partyblastr.lastfm
 
 import dispatch._
 import net.liftweb.json._
+import partyblastr.cache.{TTLCache, Cache}
 
 class LastFM {
   implicit val formats = DefaultFormats
+
+  private val cache : Cache[String, List[Track]] = new TTLCache[String, List[Track]](24 * 3600 * 1000) // in-memory cache for 24 hours
 
   def getPlaylistForUsers(usernames: List[String]) : List[Track] = {
     new PlaylistCombinator().combine(usernames.map(username => getPlaylistForUser(username))).take(20)
   }
 
-  protected def getPlaylistForUser(username : String) = {
+  protected def getPlaylistForUser(username : String) : List[Track] = cache.get(username, getPlaylistFromWebService(_))
+
+  protected def getPlaylistFromWebService(username : String) : List[Track] = {
     try {
       Http(url("http://ws.audioscrobbler.com/2.0/?method=user.gettoptracks&user=" + username + "&api_key=7f374b4805f2b2a2fb7504772139c3f0&format=json") >- { str =>
         (parse(str) \\ "track").extract[List[Track]]
