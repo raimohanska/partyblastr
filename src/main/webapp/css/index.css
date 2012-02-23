@@ -25,4 +25,5 @@ h1 {
     padding-top: 13px;
     font-size: 30px;
     text-shadow: 1px 1px 1px #fff;
+    cursor : pointer;
 }

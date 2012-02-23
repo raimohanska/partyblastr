@@ -48,6 +48,7 @@ h2 {
     padding-top: 3px;
     font-size: 24px;
     text-shadow: 1px 1px 1px #fff;
+    cursor : pointer;
 }
 #new-member-id {
     -webkit-border-radius: 20px;
@@ -107,6 +108,10 @@ h2 {
     background: -ms-linear-gradient(top,  rgba(238,238,238,1) 0%,rgba(204,204,204,1) 100%);
     background: linear-gradient(top,  rgba(238,238,238,1) 0%,rgba(204,204,204,1) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#cccccc',GradientType=0 );
+}
+
+#to-spotify {
+    cursor : pointer;
 }
 
 #playlist {
