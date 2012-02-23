@@ -14,7 +14,8 @@
       $(function() {
         $.ajax({
           url: "/party/" + partyIdFromUrl(),
-          success: showParty
+          success: showParty,
+          error: partyNotFound
         });
 
         $("#join").click(function() {
@@ -51,6 +52,10 @@
 
         function exportToSpotify(uris) {
           alert(uris.join(" "))
+        }
+
+        function partyNotFound() {
+          document.location= "not-found.html"
         }
       })
     </script>

@@ -148,7 +148,16 @@ h2 {
     text-decoration: none;
 }
 
-.error #party { display : none; }
+#not-found {
+    position: absolute;
+    left: 440px;
+    top: 25px;
+}
+
+#not-found #start-party {
+    color : #ed09a3;
+    cursor : pointer;
+}
 
 .loading .progress-indicator {
     background-image: url('../images/ajax-loader.gif');
@@ -158,8 +167,6 @@ h2 {
 .loading #playlist table {
     display : none;
 }
-#error { display : none; }
-.error #error { display : block; }
 #to-spotify.loading {
     background-image: url('../images/ajax-loader-small.gif');
     background-repeat: no-repeat;
