@@ -74,6 +74,15 @@ h2 {
 #header {
     height: 164px;
 }
+
+.empty #members {
+    display: none;
+}
+
+.empty #playlist {
+    display: none;
+}
+
 #members {
     background : url('../images/horizontalDivider.png') no-repeat left top;
     clear : both;

@@ -36,6 +36,7 @@
         })
 
         function showParty(party) {
+          if (party.members.length) $("#party").removeClass("empty")
           $("#members ul").render(party.members)
           var url = document.location.toString().replace("party.html", "")
           $("#party-url").text(url).attr("href", url)
@@ -61,7 +62,7 @@
     </script>
   </head>
   <body>
-    <div id="party">
+    <div id="party" class="empty">
       <div id="header">
         <h1>PARTYBLASTR - PARTY</h1>
         <div id="share">
