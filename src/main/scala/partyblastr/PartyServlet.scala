@@ -1,17 +1,16 @@
 package partyblastr
 
 import lastfm.LastFM
+import mongodb.MongoStorage
 import org.scalatra._
 import net.liftweb.json._
-import scala.collection.immutable.HashMap
 import spotify.Spotify
 
-class PartyServlet extends ScalatraServlet {
+class PartyServlet extends ScalatraServlet with MongoStorage {
   implicit val formats = DefaultFormats
   val idGenerator : IdGenerator = new RandomIdGenerator
   val lastFM = new LastFM
   val spotify = new Spotify()
-  private var parties = new HashMap[String, Party]
 
   post("/party") {
     val party = Party(idGenerator.nextId, Nil)
@@ -49,12 +48,12 @@ class PartyServlet extends ScalatraServlet {
   }
 
   def saveAndRenderParty(party: Party) = {
-    parties += (party.id -> party)
+    saveParty(party)
     response.setStatus(201)
     render(party)
   }
   def processPartyOrError(handleParty: (Party) => String) = {
-    parties.get(params("id")) match {
+    findParty(params("id")) match {
       case Some(party) => handleParty(party)
       case None => halt(404, "Party not found")
     }

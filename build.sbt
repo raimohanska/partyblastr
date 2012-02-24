@@ -12,6 +12,8 @@ scalaVersion := "2.9.1"
 
 seq(webSettings :_*)
 
+resolvers += "repo.novus rels" at "http://repo.novus.com/snapshots/"
+
 libraryDependencies ++= Seq(
   "org.scalatra" %% "scalatra-specs2" % "2.0.1",
   "org.scalatra" %% "scalatra" % "2.0.1",
@@ -20,5 +22,8 @@ libraryDependencies ++= Seq(
   "org.specs2" %% "specs2-scalaz-core" % "6.0.1" % "test",
   "org.eclipse.jetty" % "jetty-webapp" % "7.4.5.v20110725" % "container",
   "javax.servlet" % "servlet-api" % "2.5" % "provided",
-  "net.databinder" %% "dispatch-http" % "0.8.7"
+  "net.databinder" %% "dispatch-http" % "0.8.7",
+  "com.mongodb.casbah" %% "casbah" % "2.1.5-1",
+  "com.novus" %% "salat-core" % "0.0.8-SNAPSHOT",
+  "ch.qos.logback" % "logback-classic" % "1.0.0"
 )
