@@ -44,11 +44,19 @@
           });
         })
 
+        $("#to-facebook").click(function() {
+          var url = encodeURIComponent(partyUrl())
+          document.location = "http://www.facebook.com/sharer.php?u=" + url + "&t=PartyBlastr Party";
+        })
+
+        function partyUrl() {
+          return document.location.toString().replace("party.html", "")
+        }
+
         function showParty(party) {
           if (party.members.length) $("#party").removeClass("empty")
           $("#members ul").render(party.members)
-          var url = document.location.toString().replace("party.html", "")
-          $("#party-url").text(url).attr("href", url)
+          $("#party-url").text(partyUrl()).attr("href", partyUrl())
           $.ajax({
             url: "/party/" + partyIdFromUrl() + "/playlist",
             success: showPlaylist
