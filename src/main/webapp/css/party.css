@@ -98,7 +98,7 @@ h2 {
     margin-bottom: 5px;
 }
 
-#members .username, #to-spotify{
+#members .username, #to-facebook, #to-spotify {
     display: inline;
     margin: 0 20px 15px 0;
     -webkit-border-radius: 20px;
@@ -106,9 +106,7 @@ h2 {
     border-radius: 20px;
     color: #333;
     text-shadow: 1px 1px 1px #fff;
-    font-size: 15px;
     padding: 4px 14px;
-    float: left;
     background: rgb(238,238,238);
     background: -moz-linear-gradient(top,  rgba(238,238,238,1) 0%, rgba(204,204,204,1) 100%);
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(238,238,238,1)), color-stop(100%,rgba(204,204,204,1)));
@@ -119,8 +117,30 @@ h2 {
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#cccccc',GradientType=0 );
 }
 
-#to-spotify {
+#members .username {
+    font-size: 13px;
+    float: left;
+}
+
+#to-facebook, #to-spotify {
+    font-size: 13px;
     cursor : pointer;
+}
+
+#to-facebook {
+    margin-left: 10px;
+    position: relative;
+    padding-left: 30px;
+}
+
+#to-facebook .logo {
+    background: url('../images/facebookLogo.png') no-repeat left top;
+    display: inline-block;
+    width: 17px;
+    height: 18px;
+    position: absolute;
+    left: 5px;
+    top: 3px;
 }
 
 #playlist {
