@@ -19,13 +19,22 @@
         });
 
         $("#join").click(function() {
-          $.ajax({
-            type: 'POST',
-            url: "/party/" + partyIdFromUrl() + "/members",
-            data: $("#new-member-id").val(),
-            contentType: "text/plain",
-            success: showParty
-          })
+          if (!$(this).attr("disabled")) {
+            $("#join").attr("disabled", true)
+            var input = $("#new-member-id")
+            $.ajax({
+              type: 'POST',
+              url: "/party/" + partyIdFromUrl() + "/members",
+              data: input.val(),
+              contentType: "text/plain",
+              success: showParty
+            })
+            input.val("")
+          }
+        })
+
+        $("#new-member-id").keyup(function() {
+          $("#join").attr("disabled", false)
         })
 
         $("#to-spotify").click(function() {
@@ -70,7 +79,7 @@
         </div>
         <div id="new-member">
           <input id="new-member-id" type="text" placeholder="Enter your Last.fm username"/>
-          <a id="join">Join this party</a>
+          <a disabled="disabled" id="join">Join this party</a>
         </div>
       </div>
       <div id="members">
