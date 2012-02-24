@@ -124,23 +124,27 @@ h2 {
 
 #to-facebook, #to-spotify {
     font-size: 13px;
-    cursor : pointer;
-}
-
-#to-facebook {
     margin-left: 10px;
     position: relative;
     padding-left: 30px;
+    cursor : pointer;
 }
 
-#to-facebook .logo {
-    background: url('../images/facebookLogo.png') no-repeat left top;
+#to-facebook .logo, #to-spotify .logo {
     display: inline-block;
     width: 17px;
     height: 18px;
     position: absolute;
     left: 5px;
     top: 3px;
+}
+
+#to-spotify .logo {
+    background: url('../images/spotifyLogo.png') no-repeat left top;
+}
+
+#to-facebook .logo {
+    background: url('../images/facebookLogo.png') no-repeat left top;
 }
 
 #playlist {
