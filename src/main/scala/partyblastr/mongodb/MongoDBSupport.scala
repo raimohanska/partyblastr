@@ -6,9 +6,15 @@ import com.mongodb.casbah.query.{Imports => QueryImports}
 import com.mongodb.ServerAddress
 import partyblastr.{Member, Party}
 
-//  val server = new ServerAddress("localhost")
-  val server = new ServerAddress("staff.mongohq.com", 10095)
-class MongoStorage extends MongoDBSupport {
+trait PartyStorage {
+  def findParty(id: String) : Option[Party]
+  def addMember(party: Party, member: Member) : Option[Party]
+  def addParty(party: Party) : Option[Party]
+}
+
+class MongoStorage extends PartyStorage with MongoDBSupport {
+//  lazy val server = new ServerAddress("localhost")
+  lazy val server = new ServerAddress("staff.mongohq.com", 10095)
   lazy val mongoDB = {
     val db = MongoConnection(server)("partyblastr")
     db.authenticate("partyblastr", "partyblastr")

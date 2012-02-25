@@ -1,7 +1,7 @@
 package partyblastr
 
 import lastfm.LastFM
-import mongodb.MongoStorage
+import mongodb.{MongoStorage, PartyStorage}
 import org.scalatra._
 import net.liftweb.json._
 import spotify.Spotify
@@ -11,7 +11,7 @@ class PartyServlet extends ScalatraServlet {
   val idGenerator : IdGenerator = new RandomIdGenerator
   val lastFM = new LastFM
   val spotify = new Spotify()
-  val partyStorage = new MongoStorage
+  val partyStorage : PartyStorage = new MongoStorage
 
   post("/party") {
     val party = Party(idGenerator.nextId, Nil)

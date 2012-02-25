@@ -1,7 +1,9 @@
 package partyblastr
 
 import lastfm.{Artist, LastFM}
+import mongodb.PartyStorage
 import org.scalatra.test.specs2.MutableScalatraSpec
+import collection.immutable.HashMap
 
 class PartyServerSpec extends MutableScalatraSpec {
   args(sequential=true)
@@ -10,7 +12,7 @@ class PartyServerSpec extends MutableScalatraSpec {
     override val lastFM = new LastFM {
       override def getPlaylistForUsers(usernames: List[String]) = lastfm.Track("Hallelujah", Artist("Jeff Buckley")) :: Nil
     }
-
+    override val partyStorage = new InMemoryStorage
     override val idGenerator = new StaticIdGenerator
   }
   addServlet(servlet, "/*")
@@ -95,4 +97,16 @@ class PartyServerSpec extends MutableScalatraSpec {
 
 class StaticIdGenerator extends IdGenerator {
   def nextId = "1"
+}
+
+class InMemoryStorage extends PartyStorage {
+  private var parties = new HashMap[String, Party]
+  override def findParty(id: String) = parties.get(id)
+  override def addMember(party: Party, member: Member) = {
+    addParty(party.copy(members = party.members :+ member))
+  }
+  override def addParty(party: Party) = {
+    parties += (party.id -> party)
+    Some(party)
+  }
 }
