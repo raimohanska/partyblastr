@@ -4,7 +4,7 @@ import com.mongodb.casbah.Imports
 import com.mongodb.casbah.commons.{Imports => CommonsImports}
 import com.mongodb.casbah.query.{Imports => QueryImports}
 import com.mongodb.ServerAddress
-import partyblastr.Party
+import partyblastr.{Member, Party}
 
 trait MongoStorage extends MongoDBSupport {
 //  val server = new ServerAddress("localhost")
@@ -16,7 +16,10 @@ trait MongoStorage extends MongoDBSupport {
   }
   protected def partyCollection = mongoDB("party")
   def findParty(id: String) = partyCollection.findOne(MongoDBObject("id" -> id)).map(toObject[Party])
-  def saveParty(party: Party) = partyCollection.update(MongoDBObject("id" -> party.id), party, true, false)
+  def addMember(party: Party, member: Member) = partyCollection.findAndModify(
+    MongoDBObject("id" -> party.id), null, null, false, $push ("members" -> toDBObject(member)), true, true).map(toObject[Party])
+  def addParty(party: Party) = partyCollection.findAndModify(
+    MongoDBObject("id" -> party.id), null, null, false, party, true, true).map(toObject[Party])
 }
 
 trait MongoDBSupport extends Imports with CommonsImports with QueryImports {

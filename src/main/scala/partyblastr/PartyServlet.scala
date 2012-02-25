@@ -15,7 +15,8 @@ class PartyServlet extends ScalatraServlet with MongoStorage {
   post("/party") {
     val party = Party(idGenerator.nextId, Nil)
     response.setHeader("Location", request.getRequestURL.toString + "/" + party.id)
-    saveAndRenderParty(party)
+    response.setStatus(201)
+    render(addParty(party))
   }
   get("/party/:id") {
     processPartyOrError(render)
@@ -33,7 +34,8 @@ class PartyServlet extends ScalatraServlet with MongoStorage {
 
   post("/party/:id/members") {
     processPartyOrError { party =>
-      saveAndRenderParty(party.copy(members = party.members :+ Member(request.body)))
+      response.setStatus(201)
+      render(addMember(party, Member(request.body)))
     }
   }
 
@@ -47,11 +49,6 @@ class PartyServlet extends ScalatraServlet with MongoStorage {
     net.liftweb.json.Serialization.write(content)
   }
 
-  def saveAndRenderParty(party: Party) = {
-    saveParty(party)
-    response.setStatus(201)
-    render(party)
-  }
   def processPartyOrError(handleParty: (Party) => String) = {
     findParty(params("id")) match {
       case Some(party) => handleParty(party)
