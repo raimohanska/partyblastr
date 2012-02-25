@@ -6,17 +6,18 @@ import org.scalatra._
 import net.liftweb.json._
 import spotify.Spotify
 
-class PartyServlet extends ScalatraServlet with MongoStorage {
+class PartyServlet extends ScalatraServlet {
   implicit val formats = DefaultFormats
   val idGenerator : IdGenerator = new RandomIdGenerator
   val lastFM = new LastFM
   val spotify = new Spotify()
+  val partyStorage = new MongoStorage
 
   post("/party") {
     val party = Party(idGenerator.nextId, Nil)
     response.setHeader("Location", request.getRequestURL.toString + "/" + party.id)
     response.setStatus(201)
-    render(addParty(party))
+    render(partyStorage.addParty(party))
   }
   get("/party/:id") {
     processPartyOrError(render)
@@ -35,7 +36,7 @@ class PartyServlet extends ScalatraServlet with MongoStorage {
   post("/party/:id/members") {
     processPartyOrError { party =>
       response.setStatus(201)
-      render(addMember(party, Member(request.body)))
+      render(partyStorage.addMember(party, Member(request.body)))
     }
   }
 
@@ -50,7 +51,7 @@ class PartyServlet extends ScalatraServlet with MongoStorage {
   }
 
   def processPartyOrError(handleParty: (Party) => String) = {
-    findParty(params("id")) match {
+    partyStorage.findParty(params("id")) match {
       case Some(party) => handleParty(party)
       case None => halt(404, "Party not found")
     }

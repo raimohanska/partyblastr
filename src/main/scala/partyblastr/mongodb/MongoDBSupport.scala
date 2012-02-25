@@ -6,9 +6,9 @@ import com.mongodb.casbah.query.{Imports => QueryImports}
 import com.mongodb.ServerAddress
 import partyblastr.{Member, Party}
 
-trait MongoStorage extends MongoDBSupport {
 //  val server = new ServerAddress("localhost")
   val server = new ServerAddress("staff.mongohq.com", 10095)
+class MongoStorage extends MongoDBSupport {
   lazy val mongoDB = {
     val db = MongoConnection(server)("partyblastr")
     db.authenticate("partyblastr", "partyblastr")
@@ -19,7 +19,7 @@ trait MongoStorage extends MongoDBSupport {
   def addMember(party: Party, member: Member) = partyCollection.findAndModify(
     MongoDBObject("id" -> party.id), null, null, false, $push ("members" -> toDBObject(member)), true, true).map(toObject[Party])
   def addParty(party: Party) = partyCollection.findAndModify(
-    MongoDBObject("id" -> party.id), null, null, false, party, true, true).map(toObject[Party])
+    MongoDBObject("id" -> party.id), null, null, false, toDBObject(party), true, true).map(toObject[Party])
 }
 
 trait MongoDBSupport extends Imports with CommonsImports with QueryImports {
@@ -29,5 +29,5 @@ trait MongoDBSupport extends Imports with CommonsImports with QueryImports {
     override val typeHintStrategy = StringTypeHintStrategy(TypeHintFrequency.WhenNecessary)
   }
   def toObject[A <: CaseClass](dbObject: DBObject)(implicit m: Manifest[A]) = grater[A].asObject(dbObject)
-  implicit def toDBObject[A <: CaseClass](a: A)(implicit m: Manifest[A]) = grater[A].asDBObject(a)
+  def toDBObject[A <: CaseClass](a: A)(implicit m: Manifest[A]) = grater[A].asDBObject(a)
 }
