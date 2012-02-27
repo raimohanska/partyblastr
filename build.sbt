@@ -14,6 +14,8 @@ seq(webSettings :_*)
 
 resolvers += "repo.novus rels" at "http://repo.novus.com/snapshots/"
 
+resolvers += "oss.sonatype.org" at "https://oss.sonatype.org/content/groups/scala-tools/"
+
 libraryDependencies ++= Seq(
   "org.scalatra" %% "scalatra-specs2" % "2.0.1",
   "org.scalatra" %% "scalatra" % "2.0.1",
